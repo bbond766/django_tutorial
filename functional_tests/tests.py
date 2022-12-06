@@ -85,9 +85,9 @@ class NewVisitorTest(LiveServerTestCase):
 
         # User 2 starts a new list
         inputbox = self.browser.find_element(By.ID, 'id_new_item')
-        inputbox.send_keys('Buy Milk')
+        inputbox.send_keys('Buy milk')
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy Milk')
+        self.wait_for_row_in_list_table('1: Buy milk')
 
         # User 2 gets own unique url
         user2_lis_url = self.browser.current_url
@@ -95,6 +95,6 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotEqual(user2_lis_url, user1_list_url)
 
         # Page should only have Users 2 list
-        page_text = self.browser.find_element_by_tag_name('body').text
+        page_text = self.browser.find_element(By.TAG_NAME, 'body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
