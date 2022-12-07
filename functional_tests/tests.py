@@ -4,14 +4,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time
+import os
 
 MAX_TIME = 10
 
+STAGING_SERVER='superlists-staging.ottg.eu'
 
 class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Edge()
+        staging_server = os.environ.get('STAGING_SERVER')
+        #staging_server = STAGING_SERVER
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
 
     def tearDown(self):
         self.browser.quit()
